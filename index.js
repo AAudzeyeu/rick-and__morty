@@ -3,10 +3,11 @@ import "./src/style/pagination/style.scss";
 import "./src/style/pagination/animation.scss";
 import "./src/style/switch/style.scss";
 import "./src/style/api/style.scss";
+import "./src/style/loader/style.scss";
 
 import { createMainList, divMainContainer } from "./src/list/main"
 import { createSwitchBooksMode, inputRoundSwitch, paragraphTextSwitch } from "./src/list/switch";
-import { updateMovieState, updateAllMovieState, createDivClickToUp } from "./src/api";
+import { updateMovieState, updateAllMovieState, createDivClickToUp, getOneCharacter } from "./src/api";
 
 const { body } = document;
 

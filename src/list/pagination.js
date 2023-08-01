@@ -1,11 +1,12 @@
 import { getPageCharacter, updateMovieState } from "../api";
-import { divInvisible, divMainContainer } from "./main"
+import { divInvisible, divMainContainer } from "./main";
 
 const { body } = document;
 export const divPagination = document.createElement("form");
 const arrowRight = document.createElement("div");
 const arrowLeft = document.createElement("div");
 const arrowDoubleLeft = document.createElement("div");
+const inputthreedots = document.createElement("input");
 
 export const createPaginationList = async (page) => {
 
@@ -83,10 +84,8 @@ export const createPaginationList = async (page) => {
                 }
             };        
 
-        
-
         const containerLast = divPaginationContainer.cloneNode(true);
-        const inputthreedots = document.createElement("input");
+        
         inputthreedots.type = "text";
         inputthreedots.classList.add("three-dots");
         inputthreedots.maxLength = 2;
@@ -102,7 +101,7 @@ export const createPaginationList = async (page) => {
         containerLast.append(paginationRadioLast);
                 
         const paginationNumberLast = document.createElement("label");
-        paginationNumberLast.classList.add("pagination-item")
+        paginationNumberLast.classList.add("pagination-item");
         paginationNumberLast.textContent = maxPage;
         paginationNumberLast.setAttribute("for", `pagination-${maxPage}`);
         containerLast.append(paginationNumberLast);
@@ -151,13 +150,16 @@ export const createPaginationList = async (page) => {
     divMainContainer.append(divPagination);
 }
 
-
 divPagination.addEventListener("change", (e) => {
     e.preventDefault();
     const maxPage = 42;
-    if (e.target.value > maxPage) e.target.value = maxPage;
-    if (+e.target.value <= maxPage)  {
+    if (+e.target.value > maxPage) e.target.value = maxPage;
+    if (+e.target.value <= 0) e.target.value = 1;
+ 
+    if (+e.target.value <= maxPage )  {
         updateMovieState(+e.target.value)
+    }   else if (+e.target.value <= 0) {
+        updateMovieState(1)
     }   else {
         updateMovieState(+e.target.id.split("-")[1])
     }
@@ -167,12 +169,13 @@ divPagination.addEventListener("change", (e) => {
 
 divPagination.addEventListener("submit", (e) => {
     e.preventDefault();
-});
+})
+
 
 arrowRight.addEventListener("click", (e) => {
     e.preventDefault();
     const url = new URL(window.location);
-        const urlReverse = url.search.split('=')[1];
+    const urlReverse = url.search.split('=')[1];
 
     updateMovieState(+urlReverse + 1);
 })

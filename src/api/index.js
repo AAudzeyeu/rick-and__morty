@@ -6,23 +6,43 @@ const { body } = document;
 
 export let globalMoviesList = {};
 
-export const defaultParams = {
-	limit: 10,
-	filter: undefined,
-	search: undefined,
-	sortBy: undefined,
-	sortOrder: "desc",
+const blockContent = (promise) => {
+	const divPreloader = document.createElement("div");
+	divPreloader.classList.add("preloader");
+	const divPreloaderRow = document.createElement("div");
+	divPreloaderRow.classList.add("preloader__row");
+	divPreloader.append(divPreloaderRow);
+	const divPreloaderItemOne = document.createElement("div");
+	divPreloaderItemOne.classList.add("preloader__item");
+	divPreloaderRow.append(divPreloaderItemOne);
+	const divPreloaderItemTwo = document.createElement("div");
+	divPreloaderItemTwo.classList.add("preloader__item");
+	divPreloaderRow.append(divPreloaderItemTwo);
+
+	body.append(divPreloader);
+
+	return promise.finally(() => {
+		divPreloader.remove();
+
+	});
 };
 
-export const getPageCharacter = (page = 1) =>
+export const getPageCharacter = (page = 1) => 
+	blockContent(
 		fetch(`${baseUrl}/character/?page=${page}`).then((data) => data.json()
 	)
-
+);
 export const getAllCharacter = () => 
+blockContent(
 	fetch(`${baseUrl}/character`).then((data) => data.json()
 	)
+);
 
-
+export const getOneCharacter = (id) => 
+blockContent(
+fetch(`${baseUrl}/character/${id}`).then((data) => data.json()
+	)
+);
 
 export const updateMovieState = (page = 1) => {
 	globalMoviesList = {};
@@ -67,7 +87,6 @@ export const updateAllMovieState = () => {
 };
 
 export const createDivClickToUp = () => {
-	console.log(1);
 	const divClickToUp = document.createElement("div");
 	divClickToUp.classList.add("click-toUp-container", "arrow-8", "arrow-8-hide");
 	window.addEventListener("scroll", () => {
