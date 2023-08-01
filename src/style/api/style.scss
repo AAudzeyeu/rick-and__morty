@@ -1,0 +1,71 @@
+.arrow-8 {
+    position: fixed;
+    visibility: visible;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    right: 25px;
+    bottom: 60px;
+    cursor: pointer;
+    background: #FFF;
+    -webkit-box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    overflow: hidden;
+    -webkit-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
+}
+.arrow-8:before,
+.arrow-8:after {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    width: 20%;
+    height: 20%;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transform: translate(0, 3px) rotate(135deg);
+    -webkit-transition: .3s ease;
+    -o-transition: .3s ease;
+    transition: .3s ease;
+}
+
+@keyframes arrow-8 {
+    0% {
+        opacity: 0;
+        transform: translate(0, 53px) rotate(135deg);
+    }
+    10%, 90% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;  
+        transform: translate(0, 0) rotate(135deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(0, -53px) rotate(135deg);
+    }
+}
+
+.arrow-8:hover:before, .arrow-8:hover:after {
+    border-left-color:#FFF;
+    border-bottom-color: #FFF;
+    // animation: arrow-8 4s linear infinite;
+}
+
+// .arrow-8:hover::after {
+//     animation: arrow-8 4s linear infinite -2s;
+// }
+.arrow-8:hover {
+    background: #337AB7;
+}
+
+.arrow-8-hide {
+    visibility: hidden;
+    opacity: 0;
+}
