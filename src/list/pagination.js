@@ -1,7 +1,6 @@
 import { getPageCharacter, updateMovieState } from "../api";
 import { divInvisible, divMainContainer } from "./main";
 
-console.log(1);
 
 const { body } = document;
 export const divPagination = document.createElement("form");
