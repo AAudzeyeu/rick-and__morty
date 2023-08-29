@@ -1,4 +1,4 @@
-import { getOneCharacter } from "../api"
+import { getOneCharacter } from "../api";
 
 export const divMainContainer = document.createElement("div");
 export const divInvisible = document.createElement("div");
